@@ -74,7 +74,7 @@ module Dag
     end
 
     #Determines if a link exists between two points
-    def connected?(ancestor, descendant)
+    def is_connected?(ancestor, descendant)
       !self.find_link(ancestor, descendant).nil?
     end
 
@@ -88,7 +88,7 @@ module Dag
           if temp.length > longest.length
             longest = temp
           end
-        elsif self.connected?(child, descendant)
+        elsif self.is_connected?(child, descendant)
           temp = path.clone
           temp << child
           temp = self.longest_path_between(child, descendant, temp)
@@ -110,7 +110,7 @@ module Dag
           if shortest.blank? || temp.length < shortest.length
             shortest = temp
           end
-        elsif self.connected?(child, descendant)
+        elsif self.is_connected?(child, descendant)
           temp = path.clone
           temp << child
           temp = self.shortest_path_between(child, descendant, temp)
